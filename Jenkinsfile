@@ -17,7 +17,7 @@ pipeline {
                 script {
                     sh "docker build -t ${IMAGE_NAME} ."
                     echo 'Docker Image build done!'
-                    docker.withDockerRegistry('https://index.docker.io/v1/','docker-credentials') {
+                    docker.withRegistry('https://index.docker.io/v1/','docker-credentials') {
                     // docker image push
                     sh "docker push ${IMAGE_NAME}"
                     }
