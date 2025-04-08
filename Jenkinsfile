@@ -24,5 +24,11 @@ pipeline {
                 }
             }
         }
+        stage('Run Image stage'){
+            steps{
+                echo 'starting image run...'
+                sh "docker run -idt -p 5000:5000 ${IMAGE_NAME}"
+            }
+        }
     }
 }
