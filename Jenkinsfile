@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME='thethymca/pythonapp'
+        IMAGE_NAME="thethymca/pythonapp:${BUILD_NUMBER}"
     }
 
     stages {
@@ -15,11 +15,11 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps{
                 script {
-                    sh 'docker build -t ${thethymca/pythonapp} .'
+                    sh "docker build -t ${IMAGE_NAME} ."
                     echo 'Docker Image build done!'
-                    docker.withDockerRegistry('https://index.docker.io/v1/',"docker-credentials") {
+                    docker.withDockerRegistry('https://index.docker.io/v1/','docker-credentials-thethymca') {
                     // docker image push
-                    sh 'docker push ${thethymca/pythonapp}'
+                    sh "docker push ${IMAGE_NAME}"
                     }
                 }
             }
